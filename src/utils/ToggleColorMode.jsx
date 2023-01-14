@@ -7,6 +7,8 @@ export const ColorModeContext = createContext();
 // @children: define this variable for later passing the <App />
 const ToggleColorMode = ({ children }) => {
   const [mode, setMode] = useState('light');
+
+  // the mode switch button will use this function
   const toggleColorMode = () => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
