@@ -1,15 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemButton,
-  ListSubheader,
-  ListItemIcon,
-  Box,
-  CircularProgress,
-} from '@mui/material';
+import { Divider, List, ListItem, ListItemText, ListItemButton, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,10 +15,8 @@ const categories = [
   { label: 'Upcoming', value: 'upcoming' },
 ];
 
-const redLogo =
-  'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
-const blueLogo =
-  'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
+const redLogo = 'https://fontmeme.com/permalink/210930/8531c658a743debe1e1aa1a2fc82006e.png';
+const blueLogo = 'https://fontmeme.com/permalink/210930/6854ae5c7f76597cf8680e48a2c8a50a.png';
 
 const Sidebar = ({ setMobileOpen }) => {
   const { genreIdOrCategoryName } = useSelector(
@@ -42,14 +30,13 @@ const Sidebar = ({ setMobileOpen }) => {
   const { data, isFetching } = useGetGenresQuery();
   const dispatch = useDispatch(); //dispatch used for sending or transferring specific data from our componenet to redux
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
   return (
     <>
       <Link to="/" className={classes.imageLink}>
-        <img
-          className={classes.image}
-          src={theme.palette.mode === 'light' ? redLogo : blueLogo}
-          alt="Filmpire Logo"
-        />
+        <img className={classes.image} src={theme.palette.mode === 'light' ? redLogo : blueLogo} alt="Filmpire Logo" />
       </Link>
       <Divider />
       <List>
@@ -59,17 +46,9 @@ const Sidebar = ({ setMobileOpen }) => {
             <Link key={value} className={classes.links} to="/">
               {/*The selectGenreOrCategory function will travel from the Sidebar.jsx to store.js 
             and go to the reducers in the currentGenreOrCategory.js file*/}
-              <ListItem
-                onClick={() => dispatch(selectGenreOrCategory(value))}
-                button
-              >
+              <ListItem onClick={() => dispatch(selectGenreOrCategory(value))} button>
                 <ListItemIcon>
-                  <img
-                    src={genreIcons[label.toLowerCase()]}
-                    className={classes.genreImages}
-                    height={30}
-                    alt=""
-                  />
+                  <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} alt="" />
                 </ListItemIcon>
                 <ListItemText primary={label} />
               </ListItem>
@@ -89,17 +68,9 @@ const Sidebar = ({ setMobileOpen }) => {
           data.genres.map(({ name, id }) => {
             return (
               <Link key={name} className={classes.links} to="/">
-                <ListItem
-                  onClick={() => dispatch(selectGenreOrCategory(id))}
-                  button
-                >
+                <ListItem onClick={() => dispatch(selectGenreOrCategory(id))} button>
                   <ListItemIcon>
-                    <img
-                      src={genreIcons[name.toLowerCase()]}
-                      className={classes.genreImages}
-                      height={30}
-                      alt=""
-                    />
+                    <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} alt="" />
                   </ListItemIcon>
                   <ListItemText primary={name} />
                 </ListItem>
